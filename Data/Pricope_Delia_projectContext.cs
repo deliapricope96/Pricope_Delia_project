@@ -17,5 +17,6 @@ namespace Pricope_Delia_project.Data
         public DbSet<Pricope_Delia_project.Models.Categorie> Categorie { get; set; } = default!;
         public DbSet<Pricope_Delia_project.Models.Comanda> Comanda { get; set; } = default!;
         public DbSet<Pricope_Delia_project.Models.Produs> Produs { get; set; } = default!;
+        public DbSet<Pricope_Delia_project.Models.Client> Client { get; set; } = default!;
     }
 }

@@ -25,7 +25,7 @@ namespace Pricope_Delia_project.Pages.Clienti
         }
 
         [BindProperty]
-        public Categorie Categorie { get; set; } = default!;
+        public Client Client { get; set; } = default!;
 
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
@@ -35,7 +35,7 @@ namespace Pricope_Delia_project.Pages.Clienti
                 return Page();
             }
 
-            _context.Categorie.Add(Categorie);
+            _context.Client.Add(Client);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

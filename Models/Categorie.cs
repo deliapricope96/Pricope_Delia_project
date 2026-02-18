@@ -10,6 +10,6 @@ namespace Pricope_Delia_project.Models
         [Display(Name = "Categorie")]
         public string NumeCategorie { get; set; }
 
-        public ICollection<Produs>? Produse { get; set; }
+        public ICollection<Produs>? Produse { get; set; } 
     }
 }

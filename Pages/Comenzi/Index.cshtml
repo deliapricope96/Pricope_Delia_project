@@ -25,6 +25,8 @@
             <th>
                 @Html.DisplayNameFor(model => model.Comanda[0].Produs)
             </th>
+            <th>Pret Unitar</th>
+            <th>Total de Plata</th>
             <th></th>
         </tr>
     </thead>
@@ -38,11 +40,16 @@
                 @Html.DisplayFor(modelItem => item.Cantitate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Client.Nume)
+                @Html.DisplayFor(modelItem => item.Client.FullName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Produs.Denumire)
             </td>
+                <td>@item.Produs.Pret lei</td>
+
+                <td class="fw-bold text-success">
+                    @((item.Cantitate * item.Produs.Pret).ToString("0.00")) lei
+                </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |

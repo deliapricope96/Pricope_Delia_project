@@ -21,7 +21,7 @@ namespace Pricope_Delia_project.Pages.Comenzi
 
         public IActionResult OnGet()
         {
-        ViewData["ClientID"] = new SelectList(_context.Set<Client>(), "ID", "Nume");
+        ViewData["ClientID"] = new SelectList(_context.Set<Client>(), "ID", "FullName");
         ViewData["ProdusID"] = new SelectList(_context.Set<Produs>(), "ID", "Denumire");
             return Page();
         }

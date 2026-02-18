@@ -19,11 +19,11 @@ namespace Pricope_Delia_project.Pages.Clienti
             _context = context;
         }
 
-        public IList<Categorie> Categorie { get;set; } = default!;
+        public IList<Client> Client { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            Categorie = await _context.Categorie.ToListAsync();
+            Client = await _context.Client.ToListAsync();
         }
     }
 }

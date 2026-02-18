@@ -21,7 +21,7 @@ namespace Pricope_Delia_project.Pages.Clienti
         }
 
         [BindProperty]
-        public Categorie Categorie { get; set; } = default!;
+        public Client Client { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,12 +30,12 @@ namespace Pricope_Delia_project.Pages.Clienti
                 return NotFound();
             }
 
-            var categorie =  await _context.Categorie.FirstOrDefaultAsync(m => m.ID == id);
-            if (categorie == null)
+            var client =  await _context.Client.FirstOrDefaultAsync(m => m.ID == id);
+            if (client == null)
             {
                 return NotFound();
             }
-            Categorie = categorie;
+            Client = client;
             return Page();
         }
 
@@ -48,7 +48,7 @@ namespace Pricope_Delia_project.Pages.Clienti
                 return Page();
             }
 
-            _context.Attach(Categorie).State = EntityState.Modified;
+            _context.Attach(Client).State = EntityState.Modified;
 
             try
             {
@@ -56,7 +56,7 @@ namespace Pricope_Delia_project.Pages.Clienti
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CategorieExists(Categorie.ID))
+                if (!ClientExists(Client.ID))
                 {
                     return NotFound();
                 }
@@ -69,9 +69,9 @@ namespace Pricope_Delia_project.Pages.Clienti
             return RedirectToPage("./Index");
         }
 
-        private bool CategorieExists(int id)
+        private bool ClientExists(int id)
         {
-            return _context.Categorie.Any(e => e.ID == id);
+            return _context.Client.Any(e => e.ID == id);
         }
     }
 }

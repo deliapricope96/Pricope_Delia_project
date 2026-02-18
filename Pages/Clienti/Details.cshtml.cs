@@ -19,7 +19,7 @@ namespace Pricope_Delia_project.Pages.Clienti
             _context = context;
         }
 
-        public Categorie Categorie { get; set; } = default!;
+        public Client Client { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,14 +28,14 @@ namespace Pricope_Delia_project.Pages.Clienti
                 return NotFound();
             }
 
-            var categorie = await _context.Categorie.FirstOrDefaultAsync(m => m.ID == id);
-            if (categorie == null)
+            var client = await _context.Client.FirstOrDefaultAsync(m => m.ID == id);
+            if (client == null)
             {
                 return NotFound();
             }
             else
             {
-                Categorie = categorie;
+                Client = client;
             }
             return Page();
         }

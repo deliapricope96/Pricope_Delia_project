@@ -14,16 +14,34 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Categorie[0].NumeCategorie)
+                @Html.DisplayNameFor(model => model.Client[0].Nume)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client[0].Prenume)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client[0].Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client[0].Telefon)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Categorie) {
+@foreach (var item in Model.Client) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.NumeCategorie)
+                @Html.DisplayFor(modelItem => item.Nume)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prenume)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefon)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
