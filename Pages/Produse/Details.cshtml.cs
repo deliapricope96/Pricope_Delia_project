@@ -28,7 +28,10 @@ namespace Pricope_Delia_project.Pages.Produse
                 return NotFound();
             }
 
-            var produs = await _context.Produs.FirstOrDefaultAsync(m => m.ID == id);
+            var produs = await _context.Produs //adaugam Include pentru a aduce si categoria asociata produsului
+                .Include(p => p.Categorie)
+                .FirstOrDefaultAsync(m => m.ID == id);
+
             if (produs == null)
             {
                 return NotFound();

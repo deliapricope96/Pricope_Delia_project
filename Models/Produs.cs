@@ -14,9 +14,14 @@ namespace Pricope_Delia_project.Models
         [Column(TypeName = "decimal(6, 2)")]
         public decimal Pret { get; set; }
 
+        [Display(Name = "Descriere Produs")]
+        public string? Descriere { get; set; }
+
         public int? CategorieID { get; set; }
         public Categorie? Categorie { get; set; }
 
         public ICollection<Comanda>? Comenzi { get; set; }
+
+
     }
 }

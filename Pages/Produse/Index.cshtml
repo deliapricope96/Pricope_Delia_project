@@ -19,6 +19,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Produs[0].Pret)
             </th>
+            <th>Descriere</th>
             <th>
                 @Html.DisplayNameFor(model => model.Produs[0].Categorie)
             </th>
@@ -33,7 +34,18 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Pret)
+            
             </td>
+                <td>
+                    @{
+                        string desc = item.Descriere ?? "";
+                        if (desc.Length > 50)          // Trunchiază descrierea dacă este prea lungă
+                        {
+                            desc = desc.Substring(0, 50) + "...";
+                        }
+                    }
+                    @desc
+                </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Categorie.NumeCategorie)
             </td>
