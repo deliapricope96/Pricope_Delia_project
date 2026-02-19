@@ -21,11 +21,35 @@ namespace Pricope_Delia_project.Pages.Comenzi
 
         public IList<Comanda> Comanda { get;set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string searchString, List<string> selectedStatuses)
         {
-            Comanda = await _context.Comanda
+            ViewData["CurrentFilter"] = searchString;
+            // Salvăm statusurile selectate pentru a păstra checkbox-urile bifate după refresh
+            ViewData["SelectedStatuses"] = selectedStatuses ?? new List<string>();
+
+            var comenziQuery = _context.Comanda
                 .Include(c => c.Client)
-                .Include(c => c.Produs).ToListAsync();
+                .Include(c => c.Produs)
+                .AsQueryable();
+
+            // 1. Filtrare după SearchString (ID sau Nume)
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                bool isNumeric = int.TryParse(searchString, out int searchId);
+                if (isNumeric)
+                    comenziQuery = comenziQuery.Where(s => s.ID == searchId);
+                else
+                    comenziQuery = comenziQuery.Where(s => s.Client.Nume.Contains(searchString)
+                                                   || s.Client.Prenume.Contains(searchString));
+            }
+
+            // 2. Filtrare după Checkbox-uri (Status)
+            if (selectedStatuses != null && selectedStatuses.Any())
+            {
+                comenziQuery = comenziQuery.Where(s => selectedStatuses.Contains(s.Status));
+            }
+
+            Comanda = await comenziQuery.ToListAsync();
         }
     }
 }

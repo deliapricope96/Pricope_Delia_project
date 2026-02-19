@@ -21,9 +21,24 @@ namespace Pricope_Delia_project.Pages.Clienti
 
         public IList<Client> Client { get;set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string searchString)
         {
-            Client = await _context.Client.ToListAsync();
+            // Păstrăm valoarea căutată pentru a o reafișa în input
+            ViewData["CurrentFilter"] = searchString;
+
+            // Pornim de la interogarea de bază
+            var clientiQuery = from c in _context.Client
+                               select c;
+
+            // Dacă utilizatorul a scris ceva în căutare
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                clientiQuery = clientiQuery.Where(s => s.Nume.Contains(searchString)
+                                               || s.Prenume.Contains(searchString)
+                                               || s.Email.Contains(searchString));
+            }
+
+            Client = await clientiQuery.ToListAsync();
         }
     }
 }

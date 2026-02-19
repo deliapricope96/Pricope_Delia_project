@@ -18,5 +18,8 @@ namespace Pricope_Delia_project.Models
 
         public int? ProdusID { get; set; }
         public Produs? Produs { get; set; }
+
+        [Display(Name = "Status Comanda")]
+        public string Status { get; set; } = "In Asteptare"; // Status implicit
     }
 }

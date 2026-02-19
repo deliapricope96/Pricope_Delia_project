@@ -32,11 +32,9 @@ namespace Pricope_Delia_project.Pages.Comenzi
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+            if (!ModelState.IsValid) { return Page(); }
 
+            Comanda.Status = "In Asteptare"; // aici bagam statusul initial
             _context.Comanda.Add(Comanda);
             await _context.SaveChangesAsync();
 

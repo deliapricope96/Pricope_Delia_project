@@ -20,6 +20,17 @@
                 <span asp-validation-for="Comanda.DataComanda" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Comanda.Status" class="control-label"></label>
+                <select asp-for="Comanda.Status" class="form-control">
+                    <option value="In Asteptare">In Asteptare</option>
+                    <option value="In Preparare">In Preparare</option>
+                    <option value="Finalizata">Finalizata</option>
+                    <option value="Livrata">Livrata</option>
+                    <option value="Anulata">Anulata</option>
+                </select>
+                <span asp-validation-for="Comanda.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Comanda.Cantitate" class="control-label"></label>
                 <input asp-for="Comanda.Cantitate" class="form-control" />
                 <span asp-validation-for="Comanda.Cantitate" class="text-danger"></span>

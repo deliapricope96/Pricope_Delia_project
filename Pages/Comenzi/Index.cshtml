@@ -2,19 +2,39 @@
 @model Pricope_Delia_project.Pages.Comenzi.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Comenzi Flantastic";
 }
 
-<h1>Index</h1>
+<h1>Comenzi Flantastic</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+
+@* formular pentru cautare cu reset button
+
+<form asp-page="./Index" method="get" class="mb-4">
+    <div class="input-group">
+        <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+        <input type="text" name="searchString" class="form-control"
+               placeholder="Caută după nr. comandă (ex: 5) sau nume client..."
+               value="@ViewData["CurrentFilter"]" />
+        <button type="submit" class="btn btn-primary">Caută</button>
+        <a asp-page="./Index" class="btn btn-outline-secondary">Reset</a>
+    </div>
+</form>*@
 <table class="table">
+
     <thead>
         <tr>
             <th>
+                # Comandă
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Comanda[0].DataComanda)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comanda[0].Status)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Comanda[0].Cantitate)
@@ -32,10 +52,27 @@
     </thead>
     <tbody>
 @foreach (var item in Model.Comanda) {
-        <tr>
+        <tr><td class="fw-bold">
+    #@item.ID
+</td>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.DataComanda)
             </td>
+                <td>
+                    @{
+                        string badgeClass = Model.Comanda[0].Status switch
+                        {
+                            "In Asteptare" => "bg-secondary",
+                            "In Preparare" => "bg-warning text-dark",
+                            "Finalizata" => "bg-info text-white",
+                            "Livrata" => "bg-success",
+                            "Anulata" => "bg-danger",
+                            _ => "bg-light text-dark"
+                        };
+                    }
+                    <span class="badge @badgeClass">@item.Status</span>
+                </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Cantitate)
             </td>
@@ -58,4 +95,40 @@
         </tr>
 }
     </tbody>
+    <form asp-page="./Index" method="get" class="mb-4 p-3 bg-light border rounded">
+        <div class="row">
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Caută Comandă</label>
+                <div class="input-group mb-3">
+                    <input type="text" name="searchString" class="form-control"
+                           placeholder="ID sau Nume Client..." value="@ViewData["CurrentFilter"]" />
+                    <button type="submit" class="btn btn-primary">Filtrează</button>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Filtrează după Status</label>
+                <div class="d-flex flex-wrap gap-3">
+                    @{
+                        var statuses = new[] { "In Asteptare", "In Preparare", "Finalizata", "Livrata", "Anulata" };
+                        var selected = (List<string>)ViewData["SelectedStatuses"];
+                    }
+                    @foreach (var status in statuses)
+                    {
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="selectedStatuses"
+                                   value="@status" id="check-@status"
+                                   @(selected.Contains(status) ? "checked" : "")>
+                            <label class="form-check-label" for="check-@status">
+                                @status
+                            </label>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="mt-2">
+            <a asp-page="./Index" class="btn btn-sm btn-outline-secondary">Resetează toate filtrele</a>
+        </div>
+    </form>
 </table>

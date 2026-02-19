@@ -2,10 +2,10 @@
 @model Pricope_Delia_project.Pages.Categorii.DetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalii Categorie";
 }
 
-<h1>Details</h1>
+<h1>Detalii</h1>
 
 <div>
     <h4>Categorie</h4>
@@ -19,7 +19,62 @@
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.Categorie.ID">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+
+<hr />
+<h4 class="mb-3">Produse din categoria "@Model.Categorie.NumeCategorie"</h4>
+
+@if (Model.Categorie.Produse != null && Model.Categorie.Produse.Any())
+{
+    <table class="table table-hover mt-3">
+        <thead class="table-dark">
+            <tr>
+                <th>
+                    <a asp-page="./Details" asp-route-id="@Model.Categorie.ID" asp-route-sortOrder="@ViewData["NameSort"]" style="color: white; text-decoration: none;">
+                        Denumire Produs ↕
+                    </a>
+                </th>
+                <th>
+                    <a asp-page="./Details" asp-route-id="@Model.Categorie.ID" asp-route-sortOrder="@ViewData["PriceSort"]" style="color: white; text-decoration: none;">
+                        Preț ↕
+                    </a>
+                </th>
+                <th>Descriere</th>
+                <th class="text-center">Acțiuni</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var produs in Model.Categorie.Produse)
+            {
+                <tr>
+                    <td class="fw-bold">@produs.Denumire</td>
+                    <td>@produs.Pret lei</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(produs.Descriere))
+                        {
+                            @(produs.Descriere.Length > 60 ? produs.Descriere.Substring(0, 60) + "..." : produs.Descriere)
+                        }
+                        else
+                        {
+                            <span class="text-muted italic">Fără descriere</span>
+                        }
+                    </td>
+                    <td class="text-center">
+                        <a asp-page="/Produse/Details" asp-route-id="@produs.ID" class="btn btn-sm btn-info text-white">Vezi Produs</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-info">
+        Momentan nu există niciun produs înregistrat în această categorie.
+    </div>
+}
+
+<div class="mt-4">
+    <a asp-page="./Edit" asp-route-id="@Model.Categorie.ID" class="btn btn-warning">Edit</a> |
+    <a asp-page="./Index" class="btn btn-secondary">Back to List</a>
 </div>

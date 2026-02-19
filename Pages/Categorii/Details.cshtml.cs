@@ -21,22 +21,41 @@ namespace Pricope_Delia_project.Pages.Categorii
 
         public Categorie Categorie { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int? id, string sortOrder)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var categorie = await _context.Categorie.FirstOrDefaultAsync(m => m.ID == id);
+            // Def param de sortare pentru a-i folosi in link-uri
+            ViewData["NameSort"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["PriceSort"] = sortOrder == "Pret" ? "pret_desc" : "Pret";
+
+            var categorieQuery = _context.Categorie
+                .Include(c => c.Produse)
+                .Where(c => c.ID == id);
+
+            var categorie = await categorieQuery.FirstOrDefaultAsync();
+
             if (categorie == null)
             {
                 return NotFound();
             }
-            else
+
+            // Logica de sortare 
+            if (categorie.Produse != null)
             {
-                Categorie = categorie;
+                categorie.Produse = sortOrder switch
+                {
+                    "name_desc" => categorie.Produse.OrderByDescending(p => p.Denumire).ToList(),
+                    "Pret" => categorie.Produse.OrderBy(p => p.Pret).ToList(),
+                    "pret_desc" => categorie.Produse.OrderByDescending(p => p.Pret).ToList(),
+                    _ => categorie.Produse.OrderBy(p => p.Denumire).ToList(),
+                };
             }
+
+            Categorie = categorie;
             return Page();
         }
     }
