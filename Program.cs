@@ -5,7 +5,13 @@ using Microsoft.AspNetCore.Identity;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(options =>
+{
+    options.Conventions.AuthorizeFolder("/Clienti");
+    options.Conventions.AuthorizeFolder("/Comenzi");
+    options.Conventions.AuthorizeFolder("/Angajati");
+
+});
 
 // Contextul pt date(produse,cmenzi,angajati)
 builder.Services.AddDbContext<Pricope_Delia_projectContext>(options =>
