@@ -20,3 +20,50 @@ html {
 body {
   margin-bottom: 60px;
 }
+/* --- Personalizare Flantastic --- */
+
+/* Fundalul paginii - un crem cald */
+body {
+    background-color: #fffaf0;
+    color: #4e342e; /* Text maro închis, nu negru complet, e mai pl?cut vizual */
+}
+
+/* Meniul de sus (Navbar) */
+.navbar {
+    background-color: #5d4037 !important; /* Maro ciocolatiu */
+    border-bottom: 3px solid #e91e63; /* Linie roz subtil? sub meniu */
+}
+
+.navbar-brand, .nav-link {
+    color: #ffffff !important;
+    font-weight: 500;
+}
+
+    .nav-link:hover {
+        color: #fce4ec !important; /* Roz foarte pal la trecerea cu mouse-ul */
+    }
+
+/* Butoanele principale */
+.btn-primary {
+    background-color: #e91e63 !important; /* Roz pr?jitur? */
+    border-color: #e91e63 !important;
+    border-radius: 20px; /* Butoane rotunjite, par mai "prietenoase" */
+    padding: 8px 20px;
+}
+
+    .btn-primary:hover {
+        background-color: #c2185b !important;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+/* Tabelele s? arate mai aerisite */
+.table {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+    .table thead {
+        background-color: #f8bbd0; /* Roz pal pentru capul de tabel */
+    }

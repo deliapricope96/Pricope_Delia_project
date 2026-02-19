@@ -17,6 +17,11 @@ builder.Services.AddRazorPages(options =>
 
 });
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
+});
+
 // Contextul pt date(produse,cmenzi,angajati)
 builder.Services.AddDbContext<Pricope_Delia_projectContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Pricope_Delia_projectContext") ?? throw new InvalidOperationException("Connection string not found.")));
