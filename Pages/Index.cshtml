@@ -4,7 +4,30 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">It's Flantastic!</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center mt-5">
+    <h1 class="display-4 fw-bold text-primary">It's Flantastic!</h1>
+    <p class="lead mt-3">
+        Descoperiti pasiunea pentru ceea ce merita.
+    </p>
+    <hr class="my-4" style="width: 50%; margin: auto;">
+</div>
+
+<div class="container mt-5">
+    <div class="row text-center">
+        <div class="col-md-4">
+            <h3>Categorii</h3>
+            <p>Explorati varietatea noastra de sortimente.</p>
+            <a class="btn btn-outline-secondary" asp-page="/Categorii/Index">Vezi Categorii</a>
+        </div>
+        <div class="col-md-4">
+            <h3>Produse</h3>
+            <p>Gasiti desertul perfect pentru orice ocazie... sau painea cea de toate zilele. :)</p>
+            <a class="btn btn-outline-secondary" asp-page="/Produse/Index">Vezi Produse</a>
+        </div>
+        <div class="col-md-4">
+            <h3>Contact</h3>
+            <p>Flans, cookies, cakes, bread. Name it and it's yours.'</p>
+            <a class="btn btn-outline-secondary" href="#">Pentru comenzi: 0723456789</a>
+        </div>
+    </div>
 </div>

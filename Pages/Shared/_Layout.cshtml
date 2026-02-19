@@ -25,6 +25,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Categorii/Index">Categorii de produse</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Produse/Index">Produse</a>
+                        </li>
                         @if (SignInManager.IsSignedIn(User))
                         {
                             <li class="nav-item">
@@ -33,9 +36,8 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Comenzi/Index">Comenzi</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Produse/Index">Produse</a>
-                        </li>}
+
+                        }
                     </ul>
                     @if (User.IsInRole("Admin"))
                     {

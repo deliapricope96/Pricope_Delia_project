@@ -24,6 +24,7 @@ using System.Threading.Tasks;
 
 namespace Pricope_Delia_project.Areas.Identity.Pages.Account
 {
+    [Authorize(Roles = "Admin")]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;

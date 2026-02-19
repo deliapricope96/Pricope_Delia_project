@@ -9,7 +9,11 @@ builder.Services.AddRazorPages(options =>
 {
     options.Conventions.AuthorizeFolder("/Clienti");
     options.Conventions.AuthorizeFolder("/Comenzi");
-    options.Conventions.AuthorizeFolder("/Angajati");
+    options.Conventions.AuthorizeFolder("/Angajati", "AdminOnly");
+    options.Conventions.AllowAnonymousToPage("/Categorii/Index");
+    options.Conventions.AllowAnonymousToPage("/Categorii/Details");
+    options.Conventions.AllowAnonymousToPage("/Produse/Index");
+    options.Conventions.AllowAnonymousToPage("/Produse/Details");
 
 });
 
