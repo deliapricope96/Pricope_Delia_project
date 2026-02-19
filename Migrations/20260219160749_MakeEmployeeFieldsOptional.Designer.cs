@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pricope_Delia_project.Data;
 
@@ -11,9 +12,11 @@ using Pricope_Delia_project.Data;
 namespace Pricope_Delia_project.Migrations
 {
     [DbContext(typeof(Pricope_Delia_projectContext))]
-    partial class Pricope_Delia_projectContextModelSnapshot : ModelSnapshot
+    [Migration("20260219160749_MakeEmployeeFieldsOptional")]
+    partial class MakeEmployeeFieldsOptional
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
